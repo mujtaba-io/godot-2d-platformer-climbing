@@ -1,0 +1,13 @@
+
+
+Character is the base entity that
+provides methods to whoever controls  it.
+
+
+A character can be controlled by Human,
+AI or Network...
+
+It does not offer input handling.. Just functions that can be
+called by its parent module..
+
+

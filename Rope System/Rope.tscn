@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b75ag27nak205"]
+
+[ext_resource type="Script" path="res://Rope System/Rope.gd" id="1_0wy1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erv1p"]
+size = Vector2(20, 165)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqu4k"]
+size = Vector2(27, 9)
+
+[node name="Rope" type="Area2D"]
+script = ExtResource("1_0wy1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_erv1p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -113)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_aqu4k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

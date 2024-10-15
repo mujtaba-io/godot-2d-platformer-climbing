@@ -1,0 +1,118 @@
+[gd_scene load_steps=15 format=3 uid="uid://jshsf2omh144"]
+
+[ext_resource type="Texture2D" uid="uid://cbm4vlco6jyun" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="1_kj57d"]
+[ext_resource type="Script" path="res://Characters/Enemies/Enemy.gd" id="1_r0bh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b80ep"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efefd"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf6b3"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lusw"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru6is"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evlr2"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb8se"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(288, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffod1"]
+atlas = ExtResource("1_kj57d")
+region = Rect2(336, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ews6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b80ep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efefd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf6b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lusw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru6is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evlr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb8se")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffod1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 16.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1opy"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u7cm"]
+size = Vector2(4, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gngxe"]
+size = Vector2(21, 4)
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("floor_raycast")]
+script = ExtResource("1_r0bh3")
+floor_raycast = NodePath("FloorRayCast")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_5ews6")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t1opy")
+
+[node name="HorizontalSensors" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalSensors"]
+position = Vector2(-13, 2)
+shape = SubResource("RectangleShape2D_0u7cm")
+debug_color = Color(0.87451, 0.321569, 0.333333, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HorizontalSensors"]
+position = Vector2(13, 2)
+shape = SubResource("RectangleShape2D_0u7cm")
+debug_color = Color(0.87451, 0.321569, 0.333333, 0.419608)
+
+[node name="VerticleSensors" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticleSensors"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_gngxe")
+debug_color = Color(0.556863, 0.407843, 0.980392, 0.419608)
+
+[node name="FloorRayCast" type="RayCast2D" parent="."]
+position = Vector2(-15, 2)
+target_position = Vector2(0, 10)
+
+[connection signal="body_entered" from="HorizontalSensors" to="." method="_on_horizontal_sensors_body_entered"]
+[connection signal="body_entered" from="VerticleSensors" to="." method="_on_verticle_sensors_body_entered"]

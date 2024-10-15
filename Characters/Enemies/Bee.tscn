@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://ce58eed2bcuj0"]
+
+[ext_resource type="Texture2D" uid="uid://ivqifbawgc8c" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Small Bee/Fly/Fly-Sheet.png" id="1_8xdjk"]
+[ext_resource type="Script" path="res://Characters/Enemies/Bee.gd" id="1_cw2pa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shfcu"]
+atlas = ExtResource("1_8xdjk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxwm8"]
+atlas = ExtResource("1_8xdjk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arku5"]
+atlas = ExtResource("1_8xdjk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp1jm"]
+atlas = ExtResource("1_8xdjk")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0v7ub"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shfcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxwm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arku5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp1jm")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbcu4"]
+radius = 7.07107
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w1ka"]
+size = Vector2(10, 4)
+
+[node name="Bee" type="CharacterBody2D"]
+script = ExtResource("1_cw2pa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_0v7ub")
+animation = &"fly"
+frame_progress = 0.232533
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_hbcu4")
+
+[node name="VerticleSensors" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticleSensors"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_6w1ka")
+debug_color = Color(0.768627, 0.407843, 0.47451, 0.419608)
+
+[connection signal="body_entered" from="VerticleSensors" to="." method="_on_verticle_sensors_body_entered"]

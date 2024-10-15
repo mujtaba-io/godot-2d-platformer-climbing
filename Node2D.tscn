@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cki0r8gniji3"]
+
+[ext_resource type="Texture2D" uid="uid://f3c7lohdgc3i" path="res://assets/Free Pixel Art plataformer painted style/PREVIEWS/example.png" id="1_jox10"]
+[ext_resource type="PackedScene" uid="uid://bbcf71ylq0ci4" path="res://Characters/Character.tscn" id="2_n2ol6"]
+[ext_resource type="PackedScene" uid="uid://b75ag27nak205" path="res://Rope System/Rope.tscn" id="3_b5o7j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqcy3"]
+size = Vector2(793.359, 40.9375)
+
+[node name="Level" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(2.56, 2.56)
+texture = ExtResource("1_jox10")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/StaticBody2D"]
+position = Vector2(61.1328, 45.8594)
+shape = SubResource("RectangleShape2D_wqcy3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -44.175)
+zoom = Vector2(1.5, 1.5)
+
+[node name="Character" parent="." instance=ExtResource("2_n2ol6")]
+modulate = Color(0.940832, 0.917876, 0.836448, 1)
+position = Vector2(-133, -1)
+scale = Vector2(1.5, 1.5)
+
+[node name="Rope" parent="." instance=ExtResource("3_b5o7j")]
+position = Vector2(85, 1)

@@ -1,0 +1,108 @@
+[gd_scene load_steps=16 format=3 uid="uid://d2stwkfr3ysxs"]
+
+[ext_resource type="Texture2D" uid="uid://cfqenjwgwdxio" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-SheetBlack.png" id="1_0rtxn"]
+[ext_resource type="Script" path="res://Characters/Enemies/Boar.gd" id="1_8j37c"]
+[ext_resource type="Texture2D" uid="uid://bsvkgbgl8ua6t" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet-export-Back.png" id="2_1y2uq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4e84"]
+atlas = ExtResource("2_1y2uq")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai1nf"]
+atlas = ExtResource("2_1y2uq")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8564"]
+atlas = ExtResource("2_1y2uq")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bxq4"]
+atlas = ExtResource("2_1y2uq")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg73d"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ppt7"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvx8m"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8ov0"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp4qv"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su3w6"]
+atlas = ExtResource("1_0rtxn")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugdaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4e84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai1nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8564")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bxq4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg73d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ppt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvx8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8ov0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp4qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su3w6")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_psoo0"]
+radius = 11.0
+height = 26.0
+
+[node name="Boar" type="CharacterBody2D"]
+script = ExtResource("1_8j37c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ugdaf")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_psoo0")
+
+[node name="FloorRayCast" type="RayCast2D" parent="."]
+position = Vector2(-15, 2)
+target_position = Vector2(0, 10)
